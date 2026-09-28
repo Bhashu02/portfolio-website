@@ -1336,6 +1336,12 @@ p.lead {
     text-align: center;
   }
 
+  .project-actions-row .btn span {
+    word-break: break-all;
+    font-size: clamp(0.825rem, 3.2vw, 0.95rem);
+    text-align: center;
+  }
+
   /* Creative Highlights: Compact iOS-style feature list */
   .editorial-highlights {
     display: flex;
