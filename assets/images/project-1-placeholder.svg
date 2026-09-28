@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <filter id="subtle-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="750" fill="url(#bg1)" rx="16"/>
+
+  <!-- Browser Mockup Window -->
+  <g transform="translate(60, 45)" filter="url(#subtle-shadow)">
+    <!-- Window Frame -->
+    <rect width="1080" height="660" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+
+    <!-- Window Header / Browser Bar -->
+    <rect width="1080" height="54" rx="12" fill="#f8fafc"/>
+    <path d="M 0 54 L 1080 54" stroke="#e2e8f0" stroke-width="1.5"/>
+
+    <!-- Traffic Lights -->
+    <circle cx="28" cy="27" r="6" fill="#ef4444" opacity="0.8"/>
+    <circle cx="48" cy="27" r="6" fill="#f59e0b" opacity="0.8"/>
+    <circle cx="68" cy="27" r="6" fill="#10b981" opacity="0.8"/>
+
+    <!-- Mock URL Bar -->
+    <rect x="180" y="14" width="720" height="26" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="540" y="31" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">https://project-one-preview.com</text>
+
+    <!-- Project Preview Content Area -->
+    <rect x="0" y="54" width="1080" height="606" fill="#fbfbfa"/>
+
+    <!-- Geometric Blueprint Layout Mockup -->
+    <!-- Nav header in preview -->
+    <rect x="40" y="80" width="120" height="18" rx="4" fill="#cbd5e1"/>
+    <rect x="800" y="80" width="60" height="14" rx="4" fill="#e2e8f0"/>
+    <rect x="880" y="80" width="60" height="14" rx="4" fill="#e2e8f0"/>
+    <rect x="960" y="74" width="80" height="26" rx="6" fill="#0f766e" opacity="0.85"/>
+
+    <!-- Hero banner area -->
+    <rect x="40" y="130" width="480" height="32" rx="6" fill="#1e293b" opacity="0.85"/>
+    <rect x="40" y="175" width="400" height="16" rx="4" fill="#94a3b8"/>
+    <rect x="40" y="200" width="340" height="16" rx="4" fill="#cbd5e1"/>
+    <rect x="40" y="240" width="140" height="36" rx="6" fill="#0f766e"/>
+
+    <!-- Visual card grid on right -->
+    <rect x="560" y="130" width="480" height="210" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+    <circle cx="800" cy="220" r="36" fill="#ffffff" stroke="#cbd5e1"/>
+    <!-- Image Icon in circle -->
+    <path d="M 788 228 L 796 216 L 804 224 L 812 212 L 820 228 Z" fill="#94a3b8"/>
+
+    <!-- Bottom Feature Cards -->
+    <rect x="40" y="380" width="310" height="180" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+    <rect x="60" y="405" width="80" height="14" rx="3" fill="#cbd5e1"/>
+    <rect x="60" y="430" width="220" height="10" rx="3" fill="#e2e8f0"/>
+    <rect x="60" y="448" width="180" height="10" rx="3" fill="#e2e8f0"/>
+
+    <rect x="385" y="380" width="310" height="180" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+    <rect x="405" y="405" width="80" height="14" rx="3" fill="#cbd5e1"/>
+    <rect x="405" y="430" width="220" height="10" rx="3" fill="#e2e8f0"/>
+    <rect x="405" y="448" width="180" height="10" rx="3" fill="#e2e8f0"/>
+
+    <rect x="730" y="380" width="310" height="180" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+    <rect x="750" y="405" width="80" height="14" rx="3" fill="#cbd5e1"/>
+    <rect x="750" y="430" width="220" height="10" rx="3" fill="#e2e8f0"/>
+    <rect x="750" y="448" width="180" height="10" rx="3" fill="#e2e8f0"/>
+
+    <!-- Center Callout Badge -->
+    <rect x="290" y="580" width="500" height="50" rx="8" fill="#0f766e" opacity="0.95"/>
+    <text x="540" y="611" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">Project 1 Screenshot Placeholder (16:10 or 16:9 recommended)</text>
+  </g>
+</svg>

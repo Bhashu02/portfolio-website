@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e0e7ff"/>
+    </linearGradient>
+    <filter id="subtle-shadow2" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg2)" rx="16"/>
+
+  <g transform="translate(60, 45)" filter="url(#subtle-shadow2)">
+    <rect width="1080" height="660" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="1080" height="54" rx="12" fill="#f8fafc"/>
+    <path d="M 0 54 L 1080 54" stroke="#e2e8f0" stroke-width="1.5"/>
+
+    <circle cx="28" cy="27" r="6" fill="#ef4444" opacity="0.8"/>
+    <circle cx="48" cy="27" r="6" fill="#f59e0b" opacity="0.8"/>
+    <circle cx="68" cy="27" r="6" fill="#10b981" opacity="0.8"/>
+
+    <rect x="180" y="14" width="720" height="26" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="540" y="31" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">https://project-two-portal.com</text>
+
+    <rect x="0" y="54" width="1080" height="606" fill="#fbfbfa"/>
+
+    <!-- Dashboard layout mockup -->
+    <!-- Sidebar -->
+    <rect x="0" y="54" width="220" height="606" fill="#f1f5f9"/>
+    <rect x="25" y="85" width="140" height="24" rx="4" fill="#cbd5e1"/>
+    <rect x="25" y="140" width="170" height="14" rx="4" fill="#94a3b8"/>
+    <rect x="25" y="175" width="150" height="14" rx="4" fill="#cbd5e1"/>
+    <rect x="25" y="210" width="160" height="14" rx="4" fill="#cbd5e1"/>
+    <rect x="25" y="245" width="130" height="14" rx="4" fill="#cbd5e1"/>
+
+    <!-- Main Content Area -->
+    <rect x="260" y="85" width="320" height="24" rx="4" fill="#1e293b" opacity="0.85"/>
+    <rect x="260" y="130" width="240" height="110" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+    <rect x="525" y="130" width="240" height="110" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+    <rect x="790" y="130" width="250" height="110" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+
+    <rect x="260" y="270" width="780" height="280" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+    <!-- Analytics chart lines -->
+    <path d="M 290 500 Q 400 420 520 460 T 750 370 T 980 320" fill="none" stroke="#0f766e" stroke-width="3"/>
+    <path d="M 290 500 Q 400 420 520 460 T 750 370 T 980 320 L 980 520 L 290 520 Z" fill="#0f766e" opacity="0.08"/>
+
+    <!-- Center Callout Badge -->
+    <rect x="360" y="580" width="500" height="50" rx="8" fill="#0f766e" opacity="0.95"/>
+    <text x="610" y="611" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">Project 2 Screenshot Placeholder (16:10 or 16:9 recommended)</text>
+  </g>
+</svg>
