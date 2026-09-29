@@ -248,18 +248,20 @@ p.lead {
   height: var(--header-height);
   display: flex;
   align-items: center;
-  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease;
+  transform: translateY(0);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease;
   will-change: transform;
 }
 
-/* Hidden state when scrolling down */
+/* Hidden state when scrolling down: smooth slide up */
 .site-header.is-hidden {
   transform: translateY(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease;
 }
 
 /* Subtle elevation shadow when scrolled */
 .site-header.is-scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .nav-container {
