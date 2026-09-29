@@ -1763,6 +1763,211 @@ p.lead {
   line-height: 1.6;
 }
 
+/* Direct Message Quick Form */
+.contact-quick-form {
+  width: 100%;
+  max-width: 520px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.contact-quick-form:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 0.95rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.6rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.input-with-icon:focus-within .field-icon {
+  color: var(--accent);
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  resize: vertical;
+  min-height: 95px;
+  line-height: 1.5;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.45rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  width: auto;
+  border: none;
+  background-color: var(--accent);
+  color: #ffffff;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.3);
+}
+
+.submit-btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(20, 184, 166, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Form Status Messages */
+.form-status {
+  display: none;
+  font-size: 0.875rem;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-status.status-success {
+  background-color: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #166534;
+}
+
+html[data-theme-mode="dark"] .form-status.status-success {
+  background-color: rgba(34, 197, 94, 0.16);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+}
+
+.form-status.status-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #991b1b;
+}
+
+html[data-theme-mode="dark"] .form-status.status-error {
+  background-color: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #f87171;
+}
+
+/* Subtle separator between form and direct links */
+.contact-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 440px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.contact-divider::before,
+.contact-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.contact-divider span {
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .contact-quick-form {
+    padding: 1.25rem 1.15rem;
+  }
+  
+  .submit-btn {
+    width: 100%;
+  }
+}
+
 /* Email action block */
 .email-box {
   display: inline-flex;
