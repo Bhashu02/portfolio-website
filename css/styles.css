@@ -2091,23 +2091,32 @@ p.lead {
 }
 
 .lightbox-close-btn {
-  background-color: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #ffffff;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
 }
 
-.lightbox-close-btn:hover {
-  background-color: rgba(239, 68, 68, 0.4);
-  border-color: rgba(239, 68, 68, 0.6);
-  transform: scale(1.08);
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-close-btn:hover {
+    background-color: rgba(239, 68, 68, 0.5);
+    border-color: rgba(239, 68, 68, 0.7);
+    transform: scale(1.08);
+  }
+}
+
+.lightbox-close-btn:active {
+  background-color: rgba(239, 68, 68, 0.7);
+  transform: scale(0.94);
 }
 
 /* Lightbox Main Stage Area */
@@ -2141,38 +2150,34 @@ p.lead {
   border-radius: var(--radius-md);
   box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.15);
   cursor: grab;
-  will-change: transform, opacity, filter;
-  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.38s ease, filter 0.38s ease;
+  will-change: transform, opacity;
+  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease;
 }
 
 .lightbox-image:active {
   cursor: grabbing;
 }
 
-/* Fancy directional transition classes */
+/* Clean, natural horizontal slide transitions across all screens */
 .lightbox-image.anim-exit-left {
-  transform: translateX(-90px) scale(0.92) rotate(-1.5deg);
+  transform: translateX(-60px);
   opacity: 0;
-  filter: blur(4px);
 }
 
 .lightbox-image.anim-exit-right {
-  transform: translateX(90px) scale(0.92) rotate(1.5deg);
+  transform: translateX(60px);
   opacity: 0;
-  filter: blur(4px);
 }
 
 .lightbox-image.anim-enter-left {
-  transform: translateX(-90px) scale(0.92) rotate(-1.5deg);
+  transform: translateX(-60px);
   opacity: 0;
-  filter: blur(4px);
   transition: none !important;
 }
 
 .lightbox-image.anim-enter-right {
-  transform: translateX(90px) scale(0.92) rotate(1.5deg);
+  transform: translateX(60px);
   opacity: 0;
-  filter: blur(4px);
   transition: none !important;
 }
 
@@ -2181,10 +2186,10 @@ p.lead {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #ffffff;
   width: 52px;
   height: 52px;
@@ -2193,6 +2198,8 @@ p.lead {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   z-index: 10003;
   transition: all var(--transition-fast);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -2206,15 +2213,17 @@ p.lead {
   right: 0.75rem;
 }
 
-.lightbox-nav-btn:hover {
-  background-color: rgba(255, 255, 255, 0.26);
-  border-color: rgba(255, 255, 255, 0.45);
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.26);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+  }
 }
 
 .lightbox-nav-btn:active {
-  transform: translateY(-50%) scale(0.96);
+  transform: translateY(-50%) scale(0.95);
 }
 
 /* Lightbox Footer & Dots */

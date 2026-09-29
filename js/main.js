@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitClass = isNext ? 'anim-exit-left' : 'anim-exit-right';
     const enterClass = isNext ? 'anim-enter-right' : 'anim-enter-left';
 
-    // 1. Animate out current image with directional momentum
+    // 1. Animate out current image with smooth horizontal slide
     lightboxImg.classList.add(exitClass);
 
     setTimeout(() => {
@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateDots();
       syncUnderlyingGallery(currentSlideIndex);
 
-      // Prepare entering state
+      // Prepare entering state from opposite side
       lightboxImg.classList.remove(exitClass);
       lightboxImg.classList.add(enterClass);
 
@@ -385,8 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       setTimeout(() => {
         isTransitioning = false;
-      }, 340);
-    }, 180);
+      }, 290);
+    }, 150);
   };
 
   const openLightboxWithGallery = (stage, startIndex = 0) => {
@@ -429,24 +429,45 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   };
 
-  // Close triggers
-  lightboxClose.addEventListener('click', closeLightbox);
+  const handleClose = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    closeLightbox();
+  };
+
+  // Close triggers with instant touch and click support
+  lightboxClose.addEventListener('click', handleClose);
+  lightboxClose.addEventListener('touchend', handleClose);
   lightboxModal.addEventListener('click', (e) => {
     if (e.target === lightboxModal || e.target === lightboxStage) {
       closeLightbox();
     }
   });
 
-  // Arrows
-  lightboxPrev.addEventListener('click', (e) => {
-    e.stopPropagation();
+  // Arrows with instant touch and click support
+  const handlePrev = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     goToLightboxSlide(currentSlideIndex - 1, 'prev');
-  });
+  };
 
-  lightboxNext.addEventListener('click', (e) => {
-    e.stopPropagation();
+  const handleNext = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     goToLightboxSlide(currentSlideIndex + 1, 'next');
-  });
+  };
+
+  lightboxPrev.addEventListener('click', handlePrev);
+  lightboxPrev.addEventListener('touchend', handlePrev);
+
+  lightboxNext.addEventListener('click', handleNext);
+  lightboxNext.addEventListener('touchend', handleNext);
 
   // Keyboard navigation (Arrow keys, A/D, PageUp/PageDown, Escape)
   document.addEventListener('keydown', (e) => {
@@ -463,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Touch Swipe Gesture Controller (Interactive fluid swipe)
+  // Touch Swipe Gesture Controller (Smooth natural horizontal slide)
   let touchStartX = 0;
   let touchStartY = 0;
   let touchDeltaX = 0;
@@ -484,12 +505,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const deltaY = e.touches[0].clientY - touchStartY;
 
     if (Math.abs(touchDeltaX) > Math.abs(deltaY)) {
-      // Fluid kinetic drag with subtle angle and fading
-      const rotation = (touchDeltaX / 35).toFixed(2);
-      const scale = Math.max(0.92, 1 - Math.abs(touchDeltaX) / 1800);
-      const opacity = Math.max(0.4, 1 - Math.abs(touchDeltaX) / 700);
-      lightboxImg.style.transform = `translateX(${touchDeltaX}px) rotate(${rotation}deg) scale(${scale})`;
-      lightboxImg.style.opacity = opacity;
+      // Pure, smooth horizontal slide following finger
+      lightboxImg.style.transform = `translateX(${touchDeltaX}px)`;
     }
   }, { passive: true });
 
@@ -500,7 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxImg.style.transform = '';
     lightboxImg.style.opacity = '';
 
-    const swipeThreshold = 45;
+    const swipeThreshold = 40;
     if (touchDeltaX < -swipeThreshold) {
       goToLightboxSlide(currentSlideIndex + 1, 'next');
     } else if (touchDeltaX > swipeThreshold) {
@@ -509,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
     touchDeltaX = 0;
   }, { passive: true });
 
-  // Mouse Drag Controller (Desktop mouse drag support)
+  // Mouse Drag Controller (Smooth natural horizontal slide)
   let mouseStartX = 0;
   let mouseDeltaX = 0;
   let isMouseDragging = false;
@@ -526,11 +543,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('mousemove', (e) => {
     if (!isMouseDragging) return;
     mouseDeltaX = e.clientX - mouseStartX;
-    const rotation = (mouseDeltaX / 40).toFixed(2);
-    const scale = Math.max(0.92, 1 - Math.abs(mouseDeltaX) / 2000);
-    const opacity = Math.max(0.4, 1 - Math.abs(mouseDeltaX) / 800);
-    lightboxImg.style.transform = `translateX(${mouseDeltaX}px) rotate(${rotation}deg) scale(${scale})`;
-    lightboxImg.style.opacity = opacity;
+    // Pure, smooth horizontal slide following mouse
+    lightboxImg.style.transform = `translateX(${mouseDeltaX}px)`;
   });
 
   window.addEventListener('mouseup', () => {
@@ -541,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxImg.style.transform = '';
     lightboxImg.style.opacity = '';
 
-    const dragThreshold = 50;
+    const dragThreshold = 45;
     if (mouseDeltaX < -dragThreshold) {
       goToLightboxSlide(currentSlideIndex + 1, 'next');
     } else if (mouseDeltaX > dragThreshold) {
