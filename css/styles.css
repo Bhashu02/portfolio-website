@@ -98,6 +98,7 @@ body {
   max-width: 100%;
   width: 100%;
   position: relative;
+  padding-top: var(--header-height);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -234,17 +235,31 @@ p.lead {
    Header & Navigation
    ========================================================================== */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
   background-color: var(--header-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   height: var(--header-height);
   display: flex;
   align-items: center;
-  transition: background-color 0.4s ease, border-color 0.4s ease;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* Hidden state when scrolling down */
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+
+/* Subtle elevation shadow when scrolled */
+.site-header.is-scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .nav-container {
@@ -2299,12 +2314,23 @@ body {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
   background-color: var(--header-bg) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+section[id],
+#work,
+#about,
+#expertise,
+#contact {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
 }
 
 main,

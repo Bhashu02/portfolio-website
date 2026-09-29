@@ -24,6 +24,70 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   updateScrollProgress();
 
+  // 1b. Smart Sticky Header (Hides smoothly on scroll down, pops up immediately on scroll up)
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    let lastScrollY = Math.max(0, window.scrollY || window.pageYOffset || 0);
+    let isHeaderTicking = false;
+    const scrollDeltaThreshold = 5; // Minimum 5px scroll to avoid micro-vibrations
+    const topSafeZone = 60; // Always fully visible near top of page
+
+    const handleHeaderScroll = () => {
+      const currentScrollY = Math.max(0, window.scrollY || window.pageYOffset || 0);
+
+      // Never hide header if mobile menu or theme dropdown is active
+      const mobileNav = document.querySelector('.nav-links');
+      const isMobileMenuOpen = mobileNav && mobileNav.classList.contains('is-open');
+      const isThemeMenuOpen = document.querySelector('.theme-dropdown-menu.is-open');
+
+      if (isMobileMenuOpen || isThemeMenuOpen) {
+        siteHeader.classList.remove('is-hidden');
+        lastScrollY = currentScrollY;
+        isHeaderTicking = false;
+        return;
+      }
+
+      // Elevation shadow when scrolled away from top
+      if (currentScrollY > 15) {
+        siteHeader.classList.add('is-scrolled');
+      } else {
+        siteHeader.classList.remove('is-scrolled');
+      }
+
+      // Always show when near the very top
+      if (currentScrollY <= topSafeZone) {
+        siteHeader.classList.remove('is-hidden');
+      } else {
+        const delta = currentScrollY - lastScrollY;
+
+        if (delta > scrollDeltaThreshold) {
+          // Scrolling DOWN -> Hide header
+          siteHeader.classList.add('is-hidden');
+        } else if (delta < -scrollDeltaThreshold) {
+          // Scrolling UP even a little bit -> Pop header back up immediately!
+          siteHeader.classList.remove('is-hidden');
+        }
+      }
+
+      lastScrollY = currentScrollY;
+      isHeaderTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!isHeaderTicking) {
+        window.requestAnimationFrame(handleHeaderScroll);
+        isHeaderTicking = true;
+      }
+    }, { passive: true });
+
+    // Instantly reveal header whenever any in-page link is clicked
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', () => {
+        siteHeader.classList.remove('is-hidden');
+      });
+    });
+  }
+
   // 2. Scroll-Triggered Reveal Animations
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
