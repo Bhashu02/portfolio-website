@@ -1543,31 +1543,37 @@ p.lead {
 /* ==========================================================================
    About Me Section
    ========================================================================== */
+/* About Me Section — 4 Aligned Quadrants Grid (Desktop & Laptop) */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: var(--space-3xl);
-  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  align-items: stretch;
 }
 
 .about-card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: var(--space-xl);
+  padding: var(--space-2xl) var(--space-xl);
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.about-profile-card {
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
 .about-avatar-wrapper {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   overflow: hidden;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   border: 3.5px solid var(--accent);
   box-shadow: 0 10px 25px -5px rgba(15, 118, 110, 0.25), 0 8px 10px -6px rgba(15, 118, 110, 0.2);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -1609,39 +1615,48 @@ p.lead {
   border-radius: var(--radius-full);
 }
 
-.about-prose {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
+/* Quadrant 2: Narrative / Bio Card */
+.about-narrative-card {
+  justify-content: center;
+  gap: 1.15rem;
+  padding: var(--space-2xl) var(--space-xl);
 }
 
-.about-prose p {
-  font-size: 1.05rem;
-  line-height: 1.75;
+.about-narrative-card p {
+  font-size: 1.025rem;
+  line-height: 1.72;
   color: var(--text-secondary);
 }
 
-.approach-pillars {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-  margin-top: var(--space-md);
-}
-
-.pillar-item {
+/* Quadrants 3 & 4: Pillar Cards */
+.about-pillar-card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.about-card:hover,
+.about-pillar-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .pillar-title {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--text-primary);
 }
 
 .pillar-desc {
