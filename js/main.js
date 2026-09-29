@@ -663,31 +663,31 @@ document.addEventListener('DOMContentLoaded', () => {
       hideStatus();
 
       try {
-        const response = await fetch('https://formsubmit.co/ajax/hello@bhaswarghosh.com', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
           body: JSON.stringify({
+            access_key: '98cb9e49-6900-4b0b-ba9e-f6dfecc6e8b5',
             email: email,
             message: message,
-            _subject: `New Message from ${email} via Portfolio`,
-            _template: 'table'
+            subject: `New Message from ${email} via bhaswarghosh.com`,
+            from_name: 'Bhaswar Ghosh Portfolio'
           })
         });
 
-        if (response.ok) {
+        const data = await response.json();
+
+        if (response.ok && data.success) {
           quickForm.reset();
           showStatus("Thank you! Your message has been sent successfully. I'll get back to you soon.", 'success');
         } else {
-          throw new Error('Server returned non-200');
+          throw new Error(data.message || 'Submission failed');
         }
       } catch (err) {
-        showStatus('Connecting to mail client to send directly...', 'error');
-        setTimeout(() => {
-          window.location.href = `mailto:hello@bhaswarghosh.com?subject=${encodeURIComponent('Project Inquiry from ' + email)}&body=${encodeURIComponent(message)}`;
-        }, 1200);
+        showStatus('Message could not be sent right now. Please email hello@bhaswarghosh.com directly.', 'error');
       } finally {
         if (submitBtn) submitBtn.disabled = false;
         if (submitBtnText) submitBtnText.textContent = originalText;
