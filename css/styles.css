@@ -1858,7 +1858,7 @@ p.lead {
 .form-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .submit-btn {
