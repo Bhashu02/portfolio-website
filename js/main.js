@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.prepend(progressBar);
 
   const updateScrollProgress = () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollTop = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
     const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     progressBar.style.width = `${progress}%`;

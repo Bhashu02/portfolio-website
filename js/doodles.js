@@ -48,6 +48,9 @@
   updateDoodleColors();
 
   // Track window size and retina scaling
+  let lastWidth = window.innerWidth;
+  let lastHeight = window.innerHeight;
+
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     width = window.innerWidth;
@@ -759,10 +762,10 @@
     }
   }
 
-  // Handle scroll parallax smoothly
-  let currentScrollY = window.scrollY || window.pageYOffset || 0;
+  // Handle scroll parallax smoothly (clamped to >= 0 so mobile pull-down/rubber-banding NEVER jerks doodles)
+  let currentScrollY = Math.max(0, window.scrollY || window.pageYOffset || 0);
   window.addEventListener('scroll', () => {
-    currentScrollY = window.scrollY || window.pageYOffset || 0;
+    currentScrollY = Math.max(0, window.scrollY || window.pageYOffset || 0);
   }, { passive: true });
 
   // Main animation render loop
@@ -829,8 +832,9 @@
       const d = doodles[i];
 
       if (!prefersReducedMotion) {
-        // Individual parallax offset based on scroll position
-        const parallaxY = -(currentScrollY * d.parallaxRate);
+        // Individual parallax offset based on scroll position (always safe >= 0)
+        const safeScrollY = Math.max(0, currentScrollY);
+        const parallaxY = -(safeScrollY * d.parallaxRate);
 
         // Compute position wrapped cleanly around viewport so each doodle cycles smoothly and independently
         const posX = d.baseX + d.floatX + d.repelX;
@@ -867,11 +871,29 @@
     animationId = requestAnimationFrame(animate);
   }
 
-  // Setup listeners
+  // Mobile-safe resize listener:
+  // Mobile browsers fire 'resize' whenever address bar shrinks/expands or pull-to-refresh occurs.
+  // We ONLY re-initialize doodles when WIDTH changes significantly (e.g. orientation flip).
+  // Pulling down or minor toolbar height shifts NEVER re-randomize or disturb existing doodles!
+  let resizeDebounceTimer = null;
   window.addEventListener('resize', () => {
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+
     resize();
-    initDoodles();
-  });
+
+    if (Math.abs(newWidth - lastWidth) > 50) {
+      lastWidth = newWidth;
+      lastHeight = newHeight;
+      clearTimeout(resizeDebounceTimer);
+      resizeDebounceTimer = setTimeout(() => {
+        initDoodles();
+      }, 200);
+    } else {
+      // Just keep height updated without interrupting floating doodles
+      lastHeight = newHeight;
+    }
+  }, { passive: true });
 
   // Start engine
   resize();
