@@ -90,20 +90,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. Scroll-Triggered Reveal Animations
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  const isMobile = window.innerWidth <= 768;
 
-  if ('IntersectionObserver' in window && !prefersReducedMotion) {
+  if (isMobile) {
+    // On phones and tablets: immediately make all content visible and loaded with 0 latency
+    revealElements.forEach((el) => el.classList.add('is-visible'));
+  } else if ('IntersectionObserver' in window && !prefersReducedMotion) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          // Once animated in, we can unobserve if desired
+          // Once animated in, unobserve
           observer.unobserve(entry.target);
         }
       });
     }, {
       root: null,
-      threshold: 0.12,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.01, // Trigger as soon as even 1px enters view
+      rootMargin: '0px 0px 200px 0px' // Preload 200px before scrolling into view so content is already loaded!
     });
 
     revealElements.forEach((el) => revealObserver.observe(el));

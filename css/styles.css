@@ -160,11 +160,11 @@ input:focus-visible {
   pointer-events: none;
 }
 
-/* Scroll Reveal Animations */
+/* Scroll Reveal Animations (Snappy entrance on desktop) */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(16px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -174,9 +174,24 @@ input:focus-visible {
 }
 
 /* Stagger delay helpers */
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
+.delay-1 { transition-delay: 0.06s; }
+.delay-2 { transition-delay: 0.12s; }
+.delay-3 { transition-delay: 0.18s; }
+
+/* Mobile phones & tablets: Content is ALWAYS visible and loaded immediately with ZERO blank gaps or delayed pop-ins */
+@media (max-width: 768px) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+  .delay-1,
+  .delay-2,
+  .delay-3 {
+    transition-delay: 0s !important;
+  }
+}
 
 .section-wrapper.alt-bg {
   background-color: var(--bg-secondary);
