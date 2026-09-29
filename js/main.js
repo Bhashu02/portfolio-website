@@ -129,8 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!slides.length) return;
 
     let currentIndex = 0;
-    let autoPlayTimer = null;
-    const autoPlayDelay = 5500; // 5.5 seconds per slide
 
     const goToSlide = (index) => {
       // Wrap around
@@ -172,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
     tabs.forEach((tab, idx) => {
       tab.addEventListener('click', () => {
         goToSlide(idx);
-        restartAutoPlay();
       });
     });
 
@@ -180,37 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
         goToSlide(currentIndex - 1);
-        restartAutoPlay();
       });
     }
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
         goToSlide(currentIndex + 1);
-        restartAutoPlay();
       });
     }
-
-    // Auto-advance slideshow
-    const startAutoPlay = () => {
-      if (prefersReducedMotion || slides.length <= 1) return;
-      stopAutoPlay();
-      autoPlayTimer = setInterval(() => {
-        goToSlide(currentIndex + 1);
-      }, autoPlayDelay);
-    };
-
-    const stopAutoPlay = () => {
-      if (autoPlayTimer) {
-        clearInterval(autoPlayTimer);
-        autoPlayTimer = null;
-      }
-    };
-
-    const restartAutoPlay = () => {
-      stopAutoPlay();
-      startAutoPlay();
-    };
 
     // Touch Swipe handling for smartphone & tablet screens
     let touchStartX = 0;
@@ -221,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
       touchStartX = e.changedTouches[0].clientX;
       touchStartY = e.changedTouches[0].clientY;
       isSwiping = false;
-      stopAutoPlay();
     }, { passive: true });
 
     gallery.addEventListener('touchend', (e) => {
@@ -240,17 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setTimeout(() => { isSwiping = false; }, 200);
       }
-      restartAutoPlay();
     }, { passive: true });
-
-    // Pause on mouse hover / resume on leave
-    gallery.addEventListener('mouseenter', stopAutoPlay);
-    gallery.addEventListener('mouseleave', startAutoPlay);
-    gallery.addEventListener('focusin', stopAutoPlay);
-    gallery.addEventListener('focusout', startAutoPlay);
-
-    // Initial run
-    startAutoPlay();
   });
 
   // 4. Interactive Fullscreen Screenshot Lightbox Modal
