@@ -92,7 +92,7 @@
   </script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css?v=3.8">
+  <link rel="stylesheet" href="css/styles.css?v=3.9">
 </head>
 <body>
   <!-- Accessible Skip Navigation Link -->
@@ -1158,6 +1158,58 @@
             </p>
           </header>
 
+          <!-- Direct Message Quick Form Box -->
+          <form class="contact-quick-form" id="contact-quick-form" novalidate>
+            <div class="form-field-group">
+              <label for="sender-email" class="form-label">Your Email</label>
+              <div class="input-with-icon">
+                <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <input 
+                  type="email" 
+                  id="sender-email" 
+                  name="email" 
+                  class="form-input" 
+                  placeholder="name@company.com" 
+                  required 
+                  autocomplete="email"
+                >
+              </div>
+            </div>
+
+            <div class="form-field-group">
+              <label for="sender-message" class="form-label">Message</label>
+              <textarea 
+                id="sender-message" 
+                name="message" 
+                class="form-textarea" 
+                rows="3" 
+                placeholder="Hi Bhaswar, I'd like to talk about..." 
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary submit-btn">
+                <span>Send Message</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Form Feedback / Notification Status -->
+            <div class="form-status" id="form-status" aria-live="polite"></div>
+          </form>
+
+          <!-- Subtle Divider -->
+          <div class="contact-divider" aria-hidden="true">
+            <span>or reach out directly</span>
+          </div>
+
           <!-- Direct Email Block with Copy Helper -->
           <div class="email-box">
             <a href="mailto:hello@bhaswarghosh.com" class="email-address">hello@bhaswarghosh.com</a>
@@ -1214,6 +1266,6 @@
   <!-- Scripts -->
   <script src="js/theme.js?v=3.3"></script>
   <script src="js/doodles.js?v=3.3"></script>
-  <script src="js/main.js?v=3.8"></script>
+  <script src="js/main.js?v=3.9"></script>
 </body>
 </html>

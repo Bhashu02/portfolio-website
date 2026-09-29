@@ -655,6 +655,83 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 5b. Direct Message Quick Form Handler
+  const quickForm = document.getElementById('contact-quick-form');
+  if (quickForm) {
+    const statusDiv = document.getElementById('form-status');
+    const submitBtn = quickForm.querySelector('.submit-btn');
+    const submitBtnText = submitBtn ? submitBtn.querySelector('span') : null;
+
+    const showStatus = (text, type) => {
+      if (!statusDiv) return;
+      statusDiv.textContent = text;
+      statusDiv.className = `form-status is-visible status-${type}`;
+    };
+
+    const hideStatus = () => {
+      if (!statusDiv) return;
+      statusDiv.className = 'form-status';
+      statusDiv.textContent = '';
+    };
+
+    quickForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const emailInput = document.getElementById('sender-email');
+      const messageInput = document.getElementById('sender-message');
+
+      const email = emailInput ? emailInput.value.trim() : '';
+      const message = messageInput ? messageInput.value.trim() : '';
+
+      if (!email || !message) {
+        showStatus('Please provide both your email address and message.', 'error');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showStatus('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      if (submitBtn) submitBtn.disabled = true;
+      const originalText = submitBtnText ? submitBtnText.textContent : 'Send Message';
+      if (submitBtnText) submitBtnText.textContent = 'Sending...';
+      hideStatus();
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/hello@bhaswarghosh.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            message: message,
+            _subject: `New Message from ${email} via Portfolio`,
+            _template: 'table'
+          })
+        });
+
+        if (response.ok) {
+          quickForm.reset();
+          showStatus("Thank you! Your message has been sent successfully. I'll get back to you soon.", 'success');
+        } else {
+          throw new Error('Server returned non-200');
+        }
+      } catch (err) {
+        showStatus('Connecting to mail client to send directly...', 'error');
+        setTimeout(() => {
+          window.location.href = `mailto:hello@bhaswarghosh.com?subject=${encodeURIComponent('Project Inquiry from ' + email)}&body=${encodeURIComponent(message)}`;
+        }, 1200);
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitBtnText) submitBtnText.textContent = originalText;
+      }
+    });
+  }
+
   // 6. Dynamic Footer Year
   const currentYearSpan = document.getElementById('current-year');
   if (currentYearSpan) {
